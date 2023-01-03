@@ -2,7 +2,7 @@ from imdb import IMDb
 from tqdm import tqdm
 import numpy as np
 ia = IMDb()
-simpsons = ia.search_movie('The Simpsons')[0]
+simpsons = ia.search_movie("Grey's Anatomy")[0]
 ia.update(simpsons, 'episodes')
 episodes = simpsons['episodes']
 
@@ -12,7 +12,7 @@ def obtain_ratings(episodes):
         ##Main loop
         for seasontuple in tqdm(episodes.items()):
                 simpsratings[seasontuple[0]] = {}
-                for episodetuple in tqdm(seasontuple[1].items()):
+                for episodetuple in seasontuple[1].items():
                     episode = episodetuple[1]
                     ia.update(episode)
                     try:
@@ -44,12 +44,13 @@ def get_best(x, results):
 
 if __name__ == "__main__":
     ia = IMDb()
-    simpsons = ia.search_movie('The Simpsons')[0]
+    simpsons = ia.search_movie("Grey's Anatomy")[0]
     ia.update(simpsons, 'episodes')
     episodes = simpsons['episodes']
     results = obtain_ratings(episodes)
-    inval = raw_input("([q]uit) How many episodes you want? ")
+    inval = input("([q]uit) How many episodes you want? ")
     while(inval.lower() != "q"):
+        inval = int(inval)
         std_result = -4
         epcount = std_factor(std_result, results)
         while(epcount > inval):
